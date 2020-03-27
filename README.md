@@ -1,2 +1,5 @@
 # Employee-Registration-Form
-this is a employee registration form project using angular and web api
+Employee registration form Application using angular and web api.
+
+Created an Simple, interactive and dynamic Employee Registration Web Form With CRUD Operation,
+user can insert, updates, read and delete employee’s details in this Web Application.
