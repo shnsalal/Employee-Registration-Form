@@ -1,0 +1,9 @@
+mat-spinner {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+
+.btnSumbit {
+  background-color: rgb(86, 177, 86) ;
+}

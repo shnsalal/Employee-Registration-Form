@@ -1,0 +1,114 @@
+
+<div class="search-div">
+    <button mat-raised-button class="btnSumbit"  (click)="onRegister()">
+        <mat-icon>add</mat-icon>Register
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput placeholder="Search"  [(ngModel)]="searchKey" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataList" matSort>
+
+        <ng-container  matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="EmpName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.EmpName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="EmpCity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+          <td mat-cell *matCellDef="let element"> {{element.EmpCity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="EmpMobile">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.EmpMobile}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Edit/Delete </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+                <button mat-icon-button (click)="onDelete(row.ID)"><mat-icon>delete_outline</mat-icon></button>
+            </td>
+          </ng-container >
+
+          <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              Loading...
+              <mat-spinner></mat-spinner>
+            </mat-footer-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No Data.
+            </mat-footer-cell>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+
+       <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': dataList!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': !(dataList!=null && dataList.data.length==0)}"></mat-footer-row>
+        </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+
+<!--
+<ag-grid-angular style="width: 550px; height: 500px;"
+                class="ag-theme-material"
+                [rowData]="rowData | async"
+                [columnDefs]="columnDefs"
+                rowSelection="multiple"
+                [suppressRowClickSelection]="true"
+                pagination=true
+                paginationPageSize=8
+                animateRows=true
+                (gridReady)="onGridReady($event)"
+                (cellValueChanged)="onCellValueChanged($event)"
+                >
+            </ag-grid-angular>
+
+            <div>
+                <button (click)="deleteSelectedRows()" [disabled]="!rowsSelected()">Delete Selected Row</button>
+            </div>
+
+            <table class="table table-hover">
+                <tr bgcolor="black">
+                    <td>ID</td>
+                    <td>Employee Name</td>
+                    <td >City</td>
+                    <td >Mobile Number</td>
+                     <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+                <tr *ngFor="let emp of service.list| filterBy:searchText | orderBy: -order | paginate: { itemsPerPage: 5, currentPage: p }; let isOdd=odd; let isEven=even" [class.odd]="isOdd" [class.even]="isEven" >
+                    <td (click)="populateForm(emp)">{{emp.ID}}</td>
+                    <td (click)="populateForm(emp)">{{emp.EmpName}}</td>
+                    <td (click)="populateForm(emp)">{{emp.EmpCity}}</td>
+                    <td (click)="populateForm(emp)">{{emp.EmpMobile}}</td>
+                    <td><img (click)="onUpdate(this.employeeComponent.form)" class="btn btn-outline-danger" src="assets/images/update.png"></td>
+                    <td><img (click)="onDelete(emp.ID)" class="btn btn-outline-danger" src="assets/images/delete.png"></td>
+
+                </tr>
+             </table>
+             <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            -->

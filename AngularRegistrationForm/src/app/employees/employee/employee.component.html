@@ -1,0 +1,88 @@
+<mat-toolbar class="toolbar-color">
+    <span>{{service.form.controls['ID'].value?"Update Employee":"New Employee"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+    
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div>
+                <mat-card> <img src="assets/images/user.png" alt="logo"></mat-card>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile >
+            <div class="controles-container">
+           
+                <input type="hidden" formControlName="ID">
+                <mat-form-field>
+                    <input formControlName="EmpName" matInput maxlength="25" placeholder="Full Name*">
+                    <mat-error *ngIf="service.form.controls['EmpName'].errors?.pattern">Enter valid name.</mat-error>
+                    <mat-error *ngIf="service.form.controls['EmpName'].errors?.required">Name is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="EmpCity" matInput maxlength="15" placeholder="City*">
+                    <mat-error *ngIf="service.form.controls['EmpCity'].errors?.pattern">Enter valid city.</mat-error>
+                    <mat-error *ngIf="service.form.controls['EmpName'].errors?.required">City is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="EmpMobile"  matInput placeholder="Mobile Number*">
+                     <mat-error *ngIf="service.form.controls['EmpMobile'].errors?.minlength
+                     || service.form.controls['EmpMobile'].errors?.maxlength || service.form.controls['EmpMobile'].errors?.pattern">Enter valid number.</mat-error>
+                     <mat-error *ngIf="service.form.controls['EmpName'].errors?.required">Mobile number is required.</mat-error>
+                </mat-form-field>
+                <div class="button-row" >
+                    <tr>
+                        <td>
+                                <button  mat-raised-button  type="submit" [disabled]="service.form.invalid">{{service.form.controls['ID'].value?"Update":"Submit"}}</button>
+                        </td>
+                        <td>
+                                <button  mat-raised-button  (click)="onClear()">Clear</button>
+                        </td>
+                    </tr>
+                    
+                    
+                </div>
+
+             </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
+
+<!--<h1 align="left"><strong>Registeration</strong></h1><br>
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="ID" #ID='ngModel' [(ngModel)]="service.formData.ID" >
+ 
+    <div class="form-group" align="left">
+        <label>Name</label>
+        <input name="EmpName"   #EmpName="ngModel" [(ngModel)]="service.formData.EmpName" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$"  maxlength="30" class="form-control" placeholder="Enter Name" required>
+        <div *ngIf="EmpName.invalid && (EmpName.dirty || EmpName.touched)"
+              class="validation-error">
+              Name is required.
+        </div>
+    </div>
+
+    <div class="form-group" align="left">
+      <label>City</label>
+      <input name="EmpCity" #EmpCity="ngModel" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" maxlength="15" [(ngModel)]="service.formData.EmpCity" class="form-control" placeholder="Enter City" required>
+      <div *ngIf="EmpCity.invalid && (EmpCity.dirty || EmpCity.touched)"
+              class="validation-error">
+              City name is required.
+        </div>
+    </div>
+
+    <div class="form-group" align="left">
+        <label>Mobile</label>
+        <input  name="EmpMobile" #EmpMobile="ngModel" [(ngModel)]="service.formData.EmpMobile" pattern="^\d{10}$" class="form-control" placeholder="Enter 10 digit number" required>
+        <div *ngIf="EmpMobile.invalid && (EmpMobile.dirty || EmpMobile.touched)"
+              class="validation-error">
+              Ten digit mobile number is required.
+        </div>
+    </div>
+
+    <br/>
+    <div class="actions" align="left">
+         <button class="button" type="submit" [disabled]="form.invalid">REGISTER</button>
+    </div>
+</form>
+-->
